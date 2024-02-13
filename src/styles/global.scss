@@ -1,0 +1,13 @@
+html,
+body {
+  margin: 0 auto;
+  width: 400px;
+  max-width: 400px;
+  height: 600px;
+  max-height: 600px;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 1px rgba(#3e00d5, 0.05),
+    0 4px 16px rgba(#3e00d5, 0.1);
+}
