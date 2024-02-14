@@ -1,48 +1,41 @@
-import { useEffect, useState } from 'react';
-// Styles
-import { Link } from 'react-router-dom';
-import { ServiceLocator } from '~/services';
+import { Button, Table } from 'antd';
 import styles from './Home.module.scss';
+import { useHome } from './useHome';
 
 export default function () {
-  const [email, setEmail] = useState('');
-  useEffect(() => {
-    // ServiceLocator.getIndexedDB()
-    //   .accounts.getAccount('foo')
-    //   .then((res) => {
-    //     console.log('res', res);
-    //   });
+  const { data, handleLogoutClick } = useHome();
 
-    ServiceLocator.getIndexedDB()
-      .accounts.getLastAccount()
-      .then((res: any) => {
-        setEmail(res?.email);
-      });
-  }, []);
+  const columns = [
+    {
+      title: 'Property',
+      dataIndex: 'property',
+      key: 'property',
+      width: 80,
+      ellipsis: true,
+    },
+    {
+      title: 'Value',
+      dataIndex: 'value',
+      key: 'value',
+      width: 200,
+      ellipsis: true,
+    },
+  ];
 
   return (
     <div className={styles.root}>
-      {email ? (
-        <div className={styles.linkLogin}>
-          Hi,{'\u00A0'} {email}
-          {'\u00A0'}
-          <Link
-            to={''}
-            onClick={() => {
-              setEmail('');
-            }}
-          >
-            Log Out{' '}
-          </Link>
-        </div>
-      ) : (
-        <div className={styles.linkLogin}>
-          Hi Guest,{'\u00A0'} <Link to={'login'}>Log In </Link>
-        </div>
-      )}
-      <h2>
-        The <b>Home</b> page is in development status yet
-      </h2>
+      <Button
+        type="primary"
+        size="small"
+        className={styles.buttonLogout}
+        onClick={handleLogoutClick}
+      >
+        Log out
+      </Button>
+      <div className={styles.tableSection}>
+        <h1 className={styles.tableHeader}>IndexedDB data</h1>
+        <Table dataSource={data} columns={columns} pagination={false} />
+      </div>
     </div>
   );
 }

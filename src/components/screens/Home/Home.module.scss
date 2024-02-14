@@ -1,12 +1,21 @@
 @import "../../../styles/base";
 
 .root {
+  position: "relative";
+  padding: 100px 10px 10px 10px;
 }
 
-.linkLogin {
-  font-size: 1.2rem;
-  display: flex;
-  justify-content: end;
-  padding-top: 10px;
-  padding-right: 16px;
+.buttonLogout {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.tableSection {
+  margin: 0 10px;
+  text-align: center;
+}
+
+.tableHeader {
+  text-align: center;
 }
