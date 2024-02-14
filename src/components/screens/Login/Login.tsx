@@ -1,63 +1,49 @@
-import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Form, Input } from 'antd';
 import styles from './Login.module.scss';
 import { useLogin } from './useLogin';
 
 export default function () {
-  const { handleSubmit, onSubmit, register, errors, message } = useLogin();
+  const { emailRules, passwordRules, onFinish } = useLogin();
 
   return (
-    <div className={styles.login}>
-      <div className={styles.loginHeader}>
-        <div>
-          <Link to={'/'}>Back</Link>
-        </div>
-        <h1>Login</h1>
-      </div>
-      <div>
-        <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.loginFormGroup}>
-            <label htmlFor="email" className={styles.labelFormInput}>
-              Email
-            </label>
-            <input
-              id="email"
-              type="text"
-              {...register('email')}
-              className={clsx(
-                styles.loginFormControl,
-                errors.email ? styles.formControlIsInvalid : ''
-              )}
+    <div className={styles.root}>
+      <div className={styles.mainWrapper}>
+        <h1 className={styles.header}>Login</h1>
+        <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+        >
+          <Form.Item name="email" rules={emailRules}>
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Email"
+              className={styles.formInput}
             />
-            <div className={styles.invalidValue}>{errors.email?.message}</div>
-          </div>
-
-          <div className={styles.loginFormGroup}>
-            <label htmlFor="password" className={styles.labelFormInput}>
-              Password
-            </label>
-            <input
-              id="password"
+          </Form.Item>
+          <Form.Item name="password" rules={passwordRules}>
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
-              {...register('password')}
-              className={clsx(
-                styles.loginFormControl,
-                errors.password ? styles.formControlIsInvalid : ''
-              )}
+              placeholder="Password"
+              className={styles.formInput}
             />
-            <div className={styles.invalidValue}>
-              {errors.password?.message}
-            </div>
-          </div>
+          </Form.Item>
 
-          <div className={styles.loginFormGroup}>
-            <button type="submit" className={styles.loginButton}>
-              Log In
-            </button>
-          </div>
-        </form>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+              block
+            >
+              Log in
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
-      {message && <div className={styles.dataSaveMessage}>{message}</div>}
     </div>
   );
 }

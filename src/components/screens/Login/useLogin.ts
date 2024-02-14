@@ -1,38 +1,33 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { message } from 'antd';
+import { Rule } from 'antd/es/form';
 import { useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
 import { ServiceLocator } from '~/services';
 import { LoginCredentials } from './login.type';
 import { mockLogin } from './mockLogin';
 
-export const useLogin = () => {
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email('Email is invalid')
-      .required('Email is required')
-      .required(),
-    password: Yup.string()
-      .min(6, 'Password must be at least 6 characters')
-      .max(40, 'Password must not exceed 40 characters')
-      .required('Password is required')
-      .required(),
-  }).required();
+const emailRules: Rule[] = [
+  { required: true, message: 'Please input your Email!' },
+  { type: 'email', message: 'Please enter a valid email address' },
+];
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginCredentials>({
-    resolver: yupResolver(validationSchema),
-  });
+const validatePassword = (_: any, value: string) => {
+  if (value.length < 6) {
+    return Promise.reject('Password must be at least 6 characters long');
+  }
+  return Promise.resolve();
+};
+
+const passwordRules: Rule[] = [
+  { required: true, message: 'Please input your Password!' },
+  { validator: validatePassword },
+];
+
+export const useLogin = () => {
+  const navigate = useNavigate();
 
   const login = (data: LoginCredentials) => {
     const isLogin = mockLogin(data);
-    if (isLogin) setMessage('Login successful!');
+    if (isLogin) localStorage.setItem('email', data.email);
     return isLogin;
   };
 
@@ -43,7 +38,6 @@ export const useLogin = () => {
   }
 
   const saveToIndexedDB = (email: string) => {
-    setMessage('Saving the user data to the IndexDB');
     //use delays for the messages showing
     setTimeout(async () => {
       const currentTab = await getCurrentTab();
@@ -53,18 +47,17 @@ export const useLogin = () => {
           url: currentTab.url,
         })
         .then(() => {
-          setMessage(`The data of ${email} has been saved`);
+          message.success('Credentials has been saved');
         })
         .catch((e) => {
-          setMessage('The data saving error: ' + JSON.stringify(e));
+          message.error('The data saving error: ' + JSON.stringify(e));
         });
-      setTimeout(() => {
-        setMessage('');
-      }, 1000);
+      // setTimeout(() => {
+      // }, 1000);
     }, 1000);
   };
 
-  const onSubmit = (data: LoginCredentials) => {
+  const onFinish = (data: LoginCredentials) => {
     const isLogin = login(data);
 
     if (isLogin) {
@@ -76,8 +69,13 @@ export const useLogin = () => {
       return;
     }
 
-    setMessage('Login failed. Please check your credentials.');
+    message.error('Login failed. Please check your credentials.');
   };
 
-  return { handleSubmit, onSubmit, register, errors, message };
+  return {
+    emailRules,
+    passwordRules,
+    onFinish,
+    message,
+  };
 };
