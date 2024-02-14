@@ -3,16 +3,23 @@
   text-align: center;
 }
 
-.optionsButton {
-  height: 3rem;
-  width: 10rem;
-  border-radius: 0.25rem;
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  margin-top: 40vh;
-  font-size: 1rem;
+.buttonDelete {
+  // height: 30px;
+  // width: 70px;
+  // border-radius: 0.25rem;
+  // color: #fff;
+  // background-color: #007bff;
+  // border-color: #007bff;
+  // margin-top: 40vh;
+  // font-size: 1rem;
+  align-self: center;
+  // text-align: center;
 }
+
+// .buttonDeleteDB:hover {
+//   background-color: #fff;
+//   border-color: #fff;
+// }
 
 .optionsMessage {
   width: 60%;
@@ -20,3 +27,14 @@
   margin: 0 auto auto auto;
   margin-top: 30px;
 }
+
+.buttonDiv {
+  display: flex;
+  width: 100%;
+  // justify-content: center;
+  // align-items: center;
+  // align-content: center;
+  flex-wrap: wrap;
+}
+// #007bff
+// transition: border-color 0.3s,background 0.3s,padding 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);

@@ -1,19 +1,15 @@
-import { useState } from 'react';
+import { message } from 'antd';
 import { ServiceLocator } from '~/services';
 
 export const useDeleteAccountsData = () => {
-  const [message, setMessage] = useState('');
-  const onClick = () => {
+  const handleConfirmClick = () => {
     ServiceLocator.getIndexedDB()
       .accounts.table.clear()
       .then(() => {
-        setMessage('The accounts table has been cleared');
-
-        setTimeout(() => {
-          setMessage('');
-        }, 3000);
-      });
+        message.success('The users data has been deleted');
+      })
+      .catch((e) => message.error(`The error: ${e}`));
   };
 
-  return { onClick, message };
+  return { handleConfirmClick, message };
 };
