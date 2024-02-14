@@ -25,7 +25,6 @@ export default function () {
   return (
     <div className={styles.root}>
       <Button
-        type="primary"
         size="small"
         className={styles.buttonLogout}
         onClick={handleLogoutClick}

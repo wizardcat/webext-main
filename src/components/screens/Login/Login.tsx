@@ -12,20 +12,19 @@ export default function () {
         <h1 className={styles.header}>Login</h1>
         <Form
           name="normal_login"
-          className="login-form"
           initialValues={{ remember: true }}
           onFinish={onFinish}
         >
           <Form.Item name="email" rules={emailRules}>
             <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
+              prefix={<UserOutlined />}
               placeholder="Email"
               className={styles.formInput}
             />
           </Form.Item>
           <Form.Item name="password" rules={passwordRules}>
             <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
+              prefix={<LockOutlined />}
               type="password"
               placeholder="Password"
               className={styles.formInput}
@@ -36,7 +35,7 @@ export default function () {
             <Button
               type="primary"
               htmlType="submit"
-              className="login-form-button"
+              className={styles.loginButton}
               block
             >
               Log in

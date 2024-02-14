@@ -15,7 +15,7 @@ import { useDeleteAccountsData } from './useDeleteAccountsData';
 
 const { Content, Footer, Sider } = Layout;
 
-const items2: MenuProps['items'] = [UserOutlined].map((icon, index) => {
+const menuItems: MenuProps['items'] = [UserOutlined].map((icon, index) => {
   const key = String(index + 1);
 
   return {
@@ -58,12 +58,12 @@ export default function () {
               defaultSelectedKeys={['1']}
               defaultOpenKeys={['user1']}
               style={{ height: '100%' }}
-              items={items2}
+              items={menuItems}
             />
           </Sider>
           <Content style={{ padding: '0 24px', minHeight: 280 }}>
-            <Space className={styles.buttonDiv1}>
-              <p>Delete all users data from InsexedDB</p>
+            <Space>
+              <p>Delete all user accounts from IndexedDB</p>
 
               <Popconfirm
                 title="Delete the data"

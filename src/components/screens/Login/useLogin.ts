@@ -27,7 +27,7 @@ export const useLogin = () => {
 
   const login = (data: LoginCredentials) => {
     const isLogin = mockLogin(data);
-    if (isLogin) localStorage.setItem('email', data.email);
+
     return isLogin;
   };
 
@@ -52,8 +52,6 @@ export const useLogin = () => {
         .catch((e) => {
           message.error('The data saving error: ' + JSON.stringify(e));
         });
-      // setTimeout(() => {
-      // }, 1000);
     }, 1000);
   };
 
@@ -65,7 +63,7 @@ export const useLogin = () => {
 
       setTimeout(() => {
         navigate('/');
-      }, 4000);
+      }, 1000);
       return;
     }
 
