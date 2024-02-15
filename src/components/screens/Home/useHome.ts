@@ -5,16 +5,16 @@ import { ServiceLocator } from '~/services';
 export const useHome = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+
   useEffect(() => {
     ServiceLocator.getIndexedDB()
       .accounts.table.count()
       .then((res) => {
         if (!res) navigate('login');
+
         ServiceLocator.getIndexedDB()
           .accounts.getLastAccount()
           .then((res: any) => {
-            console.log('res.email:' + res.email);
-
             const dataSource = Object.entries(res).map(([key, value]) => ({
               key,
               property: key,
@@ -26,7 +26,6 @@ export const useHome = () => {
   }, [navigate]);
 
   const handleLogoutClick = () => {
-    setData([]);
     navigate('/login');
   };
 

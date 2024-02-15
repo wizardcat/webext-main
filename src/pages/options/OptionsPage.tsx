@@ -1,36 +1,10 @@
-import { UserOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import {
-  Breadcrumb,
-  Button,
-  Layout,
-  Menu,
-  Popconfirm,
-  Space,
-  theme,
-} from 'antd';
-import { createElement } from 'react';
+import { Button, Layout, Menu, Popconfirm, Space, theme } from 'antd';
 import styles from './Options.module.scss';
+import OptionsBreadcrumb from './components/OptionsBreadcrumb';
+import { menuItems } from './components/menuItems';
 import { useDeleteAccountsData } from './useDeleteAccountsData';
 
 const { Content, Footer, Sider } = Layout;
-
-const menuItems: MenuProps['items'] = [UserOutlined].map((icon, index) => {
-  const key = String(index + 1);
-
-  return {
-    key: `user${key}`,
-    icon: createElement(icon),
-    label: 'Users',
-
-    children: [
-      {
-        key: 1,
-        label: 'IndexedDB',
-      },
-    ],
-  };
-});
 
 export default function () {
   const { handleConfirmClick } = useDeleteAccountsData();
@@ -40,11 +14,8 @@ export default function () {
 
   return (
     <Layout>
-      <Content style={{ padding: '0 48px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>ZPass</Breadcrumb.Item>
-          <Breadcrumb.Item>Preferences</Breadcrumb.Item>
-        </Breadcrumb>
+      <Content className={styles.contentMain}>
+        <OptionsBreadcrumb />
         <Layout
           style={{
             padding: '24px 0',
@@ -61,7 +32,7 @@ export default function () {
               items={menuItems}
             />
           </Sider>
-          <Content style={{ padding: '0 24px', minHeight: 280 }}>
+          <Content className={styles.contentDelete}>
             <Space>
               <p>Delete all user accounts from IndexedDB</p>
 
@@ -81,7 +52,7 @@ export default function () {
           </Content>
         </Layout>
       </Content>
-      <Footer style={{ textAlign: 'center' }}></Footer>
+      <Footer className={styles.footer}></Footer>
     </Layout>
   );
 }

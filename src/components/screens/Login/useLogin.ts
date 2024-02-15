@@ -2,6 +2,7 @@ import { message } from 'antd';
 import { Rule } from 'antd/es/form';
 import { useNavigate } from 'react-router-dom';
 import { ServiceLocator } from '~/services';
+import { getCurrentTab } from '~/services/getCurrentTab';
 import { LoginCredentials } from './login.type';
 import { mockLogin } from './mockLogin';
 
@@ -31,12 +32,6 @@ export const useLogin = () => {
     return isLogin;
   };
 
-  async function getCurrentTab() {
-    const queryOptions = { active: true, lastFocusedWindow: true };
-    const [tab] = await chrome.tabs.query(queryOptions);
-    return tab;
-  }
-
   const saveToIndexedDB = (email: string) => {
     //use delays for the messages showing
     setTimeout(async () => {
@@ -55,7 +50,7 @@ export const useLogin = () => {
     }, 1000);
   };
 
-  const onFinish = (data: LoginCredentials) => {
+  const handleFinish = (data: LoginCredentials) => {
     const isLogin = login(data);
 
     if (isLogin) {
@@ -73,7 +68,7 @@ export const useLogin = () => {
   return {
     emailRules,
     passwordRules,
-    onFinish,
+    handleFinish,
     message,
   };
 };

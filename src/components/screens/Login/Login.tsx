@@ -4,7 +4,7 @@ import styles from './Login.module.scss';
 import { useLogin } from './useLogin';
 
 export default function () {
-  const { emailRules, passwordRules, onFinish } = useLogin();
+  const { emailRules, passwordRules, handleFinish } = useLogin();
 
   return (
     <div className={styles.root}>
@@ -13,7 +13,7 @@ export default function () {
         <Form
           name="normal_login"
           initialValues={{ remember: true }}
-          onFinish={onFinish}
+          onFinish={handleFinish}
         >
           <Form.Item name="email" rules={emailRules}>
             <Input
