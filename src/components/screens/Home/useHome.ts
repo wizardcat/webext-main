@@ -1,32 +1,40 @@
+'use client';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ServiceLocator } from '~/services';
 
-export const useHome = () => {
-  const navigate = useNavigate();
-  const [data, setData] = useState([]);
+type TableData = {
+  key: string;
+  property: string;
+  value: string;
+};
 
+export const useHome = () => {
+  const [data, setData] = useState([] as TableData[]);
+  const router = useRouter();
   useEffect(() => {
     ServiceLocator.getIndexedDB()
       .accounts.table.count()
       .then((res) => {
-        if (!res) navigate('login');
-
+        if (!res) {
+          router.push('/login');
+          return;
+        }
         ServiceLocator.getIndexedDB()
           .accounts.getLastAccount()
           .then((res: any) => {
-            const dataSource = Object.entries(res).map(([key, value]) => ({
-              key,
+            const dataSource = Object.entries(res).map(([key, value]: any) => ({
+              key: key,
               property: key,
-              value,
+              value: value,
             }));
             setData(dataSource);
           });
       });
-  }, [navigate]);
+  }, [router]);
 
   const handleLogoutClick = () => {
-    navigate('/login');
+    router.push('/login');
   };
 
   return {

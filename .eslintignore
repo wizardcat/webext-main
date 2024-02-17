@@ -3,3 +3,4 @@ coverage
 /wasm/
 /src/lib/
 /src/manifest.json
+.next

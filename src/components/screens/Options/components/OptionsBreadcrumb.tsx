@@ -1,6 +1,6 @@
-import { Breadcrumb } from 'antd';
+import { Breadcrumb } from 'antd/lib';
 
-export default function () {
+export default function OptionsBreadcrumb() {
   return (
     <Breadcrumb style={{ margin: '16px 0' }}>
       <Breadcrumb.Item>ZPass</Breadcrumb.Item>

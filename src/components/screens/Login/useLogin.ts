@@ -1,6 +1,6 @@
-import { message } from 'antd';
-import { Rule } from 'antd/es/form';
-import { useNavigate } from 'react-router-dom';
+import { message } from 'antd/lib';
+import { Rule } from 'antd/lib/form';
+import { useRouter } from 'next/navigation';
 import { ServiceLocator } from '~/services';
 import { getCurrentTab } from '~/services/getCurrentTab';
 import { LoginCredentials } from './login.type';
@@ -24,7 +24,7 @@ const passwordRules: Rule[] = [
 ];
 
 export const useLogin = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const login = (data: LoginCredentials) => {
     const isLogin = mockLogin(data);
@@ -39,7 +39,7 @@ export const useLogin = () => {
       ServiceLocator.getIndexedDB()
         .accounts.createAccount({
           email: email,
-          url: currentTab.url,
+          url: currentTab.url || '',
         })
         .then(() => {
           message.success('Credentials has been saved');
@@ -52,16 +52,13 @@ export const useLogin = () => {
 
   const handleFinish = (data: LoginCredentials) => {
     const isLogin = login(data);
-
     if (isLogin) {
       saveToIndexedDB(data.email);
-
       setTimeout(() => {
-        navigate('/');
+        router.push('/');
       }, 1000);
       return;
     }
-
     message.error('Login failed. Please check your credentials.');
   };
 

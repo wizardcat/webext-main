@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message } from 'antd/lib';
 import { ServiceLocator } from '~/services';
 
 export const useDeleteAccountsData = () => {

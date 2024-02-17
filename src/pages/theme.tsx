@@ -1,7 +1,7 @@
-import type { ReactNode, CSSProperties } from 'react';
-import ConfigProvider from 'antd/es/config-provider';
+import ConfigProvider from 'antd/lib/config-provider';
+import type { CSSProperties, ReactNode } from 'react';
 // Styles
-import './global.scss';
+// import './global.scss';
 
 const baseColors: Record<string, CSSProperties['color']> = {
   $brandViolet900: '#20075c',
@@ -37,7 +37,7 @@ const baseColors: Record<string, CSSProperties['color']> = {
   Red60: '#dc3452',
 };
 
-export default function ({ children = null as ReactNode }) {
+export default function ThemeProvider({ children = null as ReactNode }) {
   return (
     <ConfigProvider
       theme={{

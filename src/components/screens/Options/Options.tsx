@@ -1,4 +1,5 @@
-import { Button, Layout, Menu, Popconfirm, Space, theme } from 'antd';
+'use client';
+import { Button, Layout, Menu, Popconfirm, Space, theme } from 'antd/lib';
 import styles from './Options.module.scss';
 import OptionsBreadcrumb from './components/OptionsBreadcrumb';
 import { menuItems } from './components/menuItems';
@@ -6,7 +7,7 @@ import { useDeleteAccountsData } from './useDeleteAccountsData';
 
 const { Content, Footer, Sider } = Layout;
 
-export default function () {
+export default function Options() {
   const { handleConfirmClick } = useDeleteAccountsData();
   const {
     token: { colorBgContainer, borderRadiusLG },

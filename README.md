@@ -39,3 +39,11 @@
    ```bash
    pnpm run dev
    ```
+
+These scripts is necessary for the Next.js project version:
+dist.js - rename "\_next" to "next" in dist folder for pathes and the folder name.
+custom.d.ts - needs for svg icons import.
+
+This line shall be commented in next.config.mjs for starting the project in the dev mode:
+distDir: './dist',
+This property can be removed, but the Next will build project in "out" folder. The dist.js script shall be updated in this case.

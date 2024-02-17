@@ -11,6 +11,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
+    'next/core-web-vitals',
   ],
   overrides: [
     {
@@ -46,7 +47,7 @@ module.exports = {
         allowTemplateLiterals: false,
       },
     ],
-    indent: ['error', 2, { SwitchCase: 1 }],
+    // indent: ['error', 2, { SwitchCase: 1 }],
     'max-len': [
       'warn',
       {

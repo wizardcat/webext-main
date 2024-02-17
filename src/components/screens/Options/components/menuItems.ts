@@ -1,5 +1,5 @@
-import { UserOutlined } from '@ant-design/icons';
-import { MenuProps } from 'antd';
+import { UserOutlined } from '@ant-design/icons/lib';
+import { MenuProps } from 'antd/lib';
 import { createElement } from 'react';
 
 export const menuItems: MenuProps['items'] = [UserOutlined].map(

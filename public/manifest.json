@@ -1,16 +1,14 @@
 {
-  "{{chrome}}.action": {
-    "default_popup": "src/pages/popup/popup.html"
+  "name": "webext",
+  "version": "0.0.1",
+  "action": {
+    "default_popup": "index.html"
   },
-  "{{chrome}}.manifest_version": 3,
-  "{{firefox}}.browser_action": {
-    "default_popup": "src/pages/popup/popup.html"
-  },
-  "{{firefox}}.manifest_version": 2,
+  "manifest_version": 3,
+  "options_page": "options.html",
   "content_security_policy": {
     "extension_pages": "script-src 'self' 'wasm-unsafe-eval' http://localhost;object-src 'self';"
   },
-  "options_page": "src/pages/options/options.html",
   "icons": {
     "16": "icon/16.png",
     "32": "icon/32.png",

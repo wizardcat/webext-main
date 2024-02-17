@@ -1,8 +1,9 @@
-import { Button, Table } from 'antd';
+'use client';
+import { Button, Table } from 'antd/lib';
 import styles from './Home.module.scss';
 import { useHome } from './useHome';
 
-export default function () {
+export default function HomePage() {
   const { data, handleLogoutClick } = useHome();
 
   const columns = [

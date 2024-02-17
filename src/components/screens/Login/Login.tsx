@@ -1,9 +1,10 @@
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+'use client';
+import { LockOutlined, UserOutlined } from '@ant-design/icons/lib';
+import { Button, Form, Input } from 'antd/lib';
 import styles from './Login.module.scss';
 import { useLogin } from './useLogin';
 
-export default function () {
+export default function Login() {
   const { emailRules, passwordRules, handleFinish } = useLogin();
 
   return (
