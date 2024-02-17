@@ -14,24 +14,16 @@ export const useHome = () => {
   const router = useRouter();
   useEffect(() => {
     ServiceLocator.getIndexedDB()
-      .accounts.table.count()
-      .then((res) => {
-        if (!res) {
-          router.push('/login');
-          return;
-        }
-        ServiceLocator.getIndexedDB()
-          .accounts.getLastAccount()
-          .then((res: any) => {
-            const dataSource = Object.entries(res).map(([key, value]: any) => ({
-              key: key,
-              property: key,
-              value: value,
-            }));
-            setData(dataSource);
-          });
+      .accounts.getLastAccount()
+      .then((res: any) => {
+        const dataSource = Object.entries(res).map(([key, value]: any) => ({
+          key: key,
+          property: key,
+          value: value,
+        }));
+        setData(dataSource);
       });
-  }, [router]);
+  }, []);
 
   const handleLogoutClick = () => {
     router.push('/login');

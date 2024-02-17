@@ -47,7 +47,7 @@ export const useLogin = () => {
         .catch((e) => {
           message.error('The data saving error: ' + JSON.stringify(e));
         });
-    }, 1000);
+    }, 500);
   };
 
   const handleFinish = (data: LoginCredentials) => {
@@ -55,8 +55,8 @@ export const useLogin = () => {
     if (isLogin) {
       saveToIndexedDB(data.email);
       setTimeout(() => {
-        router.push('/');
-      }, 1000);
+        router.push('/home');
+      }, 500);
       return;
     }
     message.error('Login failed. Please check your credentials.');

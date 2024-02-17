@@ -1,9 +1,9 @@
-import HomePage from '~/components/screens/Home/Home';
+import LoginPage from './login';
 
 export default function Home() {
   return (
     <div style={{ height: '100%' }}>
-      <HomePage />
+      <LoginPage />
     </div>
   );
 }
