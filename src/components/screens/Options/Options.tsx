@@ -24,7 +24,7 @@ export default function Options() {
             borderRadius: borderRadiusLG,
           }}
         >
-          <Sider style={{ background: colorBgContainer }} width={200}>
+          <Sider style={{ background: colorBgContainer }} width={170}>
             <Menu
               mode="inline"
               defaultSelectedKeys={['1']}
